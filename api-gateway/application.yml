@@ -1,0 +1,41 @@
+server:
+  port: 8082
+  servlet:
+    contextPath: /cdcp-api-gateway-service
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+    org.springframework.cloud.gateway: TRACE
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+      routes:
+        - id: self-service-file-microservice
+          uri: lb://self-service-file-microservice
+          predicates:
+            - Path= /self-service-file-microservice/v1/api/uploader/**,/self-service-file-microservice/v1/api/file-services/**,/self-service-file-microservice/v1/api/airflow-service/**,/self-service-file-microservice/v1/api/self-service-process-status/**,/self-service-file-microservice/v1/api/self-service-status/**
+        - id: self-service-template-microservice
+          uri: lb://self-service-template-microservice
+          predicates:
+            - Path= /self-service-template-microservice/v1/api/cleansing-station/**,/self-service-template-microservice/v1/api/template/**,/self-service-template-microservice/v1/api/data-processor/**,/self-service-template-microservice/v1/api/sanity-rules/**,/self-service-template-microservice/v1/api/transformation-rules/**
+        - id: self-service-user-management-microservice
+          uri: lb://self-service-user-management-microservice
+          predicates:
+            - Path= /self-service-user-management-microservice/v1/api/user-mgmt/**
+        - id: self-service-oracle-template-microservice
+          uri: lb://self-service-oracle-template-microservice
+          predicates:
+            - Path= /self-service-oracle-template-microservice/v1/api/oracle-db/**
+
+info:
+  application:
+    webPortalOrigin: http://localhost:3000,http://20.219.56.2:30000,https://frontend-service-kislay99-dev.apps.sandbox-m4.g2pi.p1.openshiftapps.com/

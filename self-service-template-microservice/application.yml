@@ -1,0 +1,56 @@
+server:
+  port: 0
+  servlet:
+    contextPath: /self-service-template-microservice
+
+spring:
+  application:
+    name: self-service-template-microservice
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 10000
+      maxLifetime: 10000
+      keepaliveTime: 5000
+      maximumPoolSize: 20
+      minimumIdle: 5
+      pool-name: self-service-template-microservice
+  devtools:
+    restart:
+      enabled: true
+  tomcat:
+    max-swallow-size: -1
+    max-http-form-post-size: -1
+  servlet:
+    multipart:
+      max-request-size: 10GB
+      max-file-size: 10GB
+      enabled: true
+
+  jpa:
+    properties:
+      hibernate:
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+springdoc:
+  api-docs:
+    path: /swagger/api/v1/api-docs
+
+openapi:
+  info:
+    title: "SSP Template Service API"
+    version: "v_1.0"
+    ownerName: "Akshay Adme"
+    ownerEmail: "akshay.adme@nagarro.com"
+    termsOfService: "http://dhl.io/terms/"
+    licenseName: "Apache 2.0"
+    licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.html"
+
+http:
+  security:
+    allowRequests: /swagger/**,/swagger-ui/**,/v1/api/user-mgmt/**

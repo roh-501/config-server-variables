@@ -1,0 +1,50 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  postgres:
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/dhl_microservice?stringtype=unspecified
+      password: root
+      username: postgres
+
+  oracle:
+    datasource:
+      driver-class-name: oracle.jdbc.OracleDriver
+      jdbc-url: jdbc:oracle:thin:@localhost:1521:ORCL
+      password: rootuser
+      username: c##cdcp_usr_mgmt
+
+  security:
+    oauth2:
+      client:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/nagarro_cdcp
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+keycloak:
+  admin:
+    client: cdcp-admin
+    client-secret: ip9GCei3ewI3I9EC5xZxvs8Hf3a9vFYs
+
+  url: http://localhost:8080
+  realm: nagarro_cdcp
+  issuer-uri: http://localhost:8080/realms/nagarro_cdcp
+  client: cdcp
+  client-secret: 48tUhS0rh3dKMkGjPSEBtbAzkPBez9VU
+
+jwt:
+  auth:
+    converter:
+      resource-id: cdcp
+      principal-attribute: preferred_username
+
+openapi:
+  info:
+    server: http://localhost:8082/self-service-user-management-microservice

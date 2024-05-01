@@ -1,0 +1,51 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+application:
+  config:
+    template-url: http://localhost:6011/api/template
+    cleansing-station-url: http://localhost:6011/api/cleansing-station
+
+spring:
+  db:
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/dhl_microservice?stringtype=unspecified
+      password: root
+      username: postgres
+      database: dhl_microservice
+      port: 5432
+      dbHost: localhost
+
+  security:
+    oauth2:
+      client:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/nagarro_cdcp
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: cdcp
+      principal-attribute: preferred_username
+
+airflow:
+  url: http://20.55.72.143
+  username: akshay.adme
+  password: akshay@1234
+  dag-name: self_service
+
+hdfs:
+  base-url: hdfs://20.55.72.143:9000
+  username: cdcpuser
+  web-url: https://20.55.72.143:14000/webhdfs/v1/
+
+openapi:
+  info:
+    server: http://localhost:8082/self-service-file-microservice
