@@ -9,15 +9,15 @@ spring:
   db:
     datasource:
       driver-class-name: oracle.jdbc.OracleDriver
-      jdbc-url: jdbc:oracle:thin:@localhost:1521:ORCL
-      password: rootuser
-      username: c##cdcp_usr_mgmt
+      jdbc-url: jdbc:oracle:thin:@localhost:1521:XE
+      password: root
+      username: CDCP_GOLDEN_RECORDS
   security:
     oauth2:
       client:
       resourceserver:
         jwt:
-          issuer-uri: http://20.219.56.2:30435/auth/realms/nagarro_cdcp
+          issuer-uri: http://localhost:8080/realms/nagarro_cdcp
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 jwt:
