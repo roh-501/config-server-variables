@@ -34,7 +34,7 @@ spring:
         - id: self-service-oracle-template-microservice
           uri: lb://self-service-oracle-template-microservice
           predicates:
-            - Path= /self-service-oracle-template-microservice/v1/api/oracle-db/**
+            - Path= /self-service-oracle-template-microservice/v1/api/oracle-db/**, /self-service-oracle-template-microservice/v1/api/dedupe/**
 
 info:
   application:
